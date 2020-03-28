@@ -7,13 +7,25 @@
 
 #define MIN_PID 100
 #define MAX_PID 1000
-#define NO_OF_P 16    
+#define NO_OF_P 16
+#define ARRSIZE MAX_PID-MIN_PID
 
-int p[MAX_PID-MIN_PID]={0};
+int p[ARRSIZE];
+//initially assigning 0
+int k;
+int allot()
+{
+ int k;
+ for(k=0;k<ARRSIZE;k++)
+ {
+  p[k]=0;
+ }
+}
+
 int assign(void)
 {
   int i,flag=1;
-  for(i=0;i<MAX_PID-MIN_PID;i++)
+  for(i=0;i<ARRSIZE;i++)
   {
    if(p[i]==0)
    {
@@ -39,7 +51,7 @@ printf("pid's are not avaliable");
 }
 else
 {
-printf("Thread [%3d] PID [%3d] Allocated\n",tid,id+MIN_PID);
+printf("Thread [%3d] PID [%3d] assigned\n",tid,id+MIN_PID);
         //to sleep for a random time between 1-10 seconds
         int r=1+rand()%30;
         sleep(r);
@@ -52,6 +64,7 @@ printf("Thread [%3d] PID [%3d] Allocated\n",tid,id+MIN_PID);
 int main()
 {
 int i;
+allot();
 pthread_t pro[NO_OF_P];
 srand(time(NULL));
 for(i=0;i<NO_OF_P;i++)
@@ -62,5 +75,5 @@ if(pthread_create(&pro[i],NULL,thread,(void*)&i))
 for(i=0; i<NO_OF_P; i++)
         pthread_join(pro[i],NULL);
 
-return 0*printf("\nSUCCESSFUL");
+return 0*printf("\nSuccesful\n");
 }
