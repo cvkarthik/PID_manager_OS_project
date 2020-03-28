@@ -7,9 +7,9 @@
 
 #define MIN_PID 100
 #define MAX_PID 1000
-#define NO_OF_P 16
 #define ARRSIZE MAX_PID-MIN_PID
 
+int NO_OF_P;
 int p[ARRSIZE];
 //initially assigning 0
 int k;
@@ -63,6 +63,8 @@ printf("Thread [%3d] PID [%3d] assigned\n",tid,id+MIN_PID);
 }
 int main()
 {
+printf("Enter no of processes");
+scanf("%d",&NO_OF_P);
 int i;
 allot();
 pthread_t pro[NO_OF_P];
